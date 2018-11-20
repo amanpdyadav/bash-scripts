@@ -1,0 +1,13 @@
+#!/bin/bash
+
+APP_HOME=/home/deployment
+ZIPFILE=($APP_HOME/checker-*.zip)
+
+if [ -f $ZIPFILE ]; then
+    rm -rf $APP_HOME/runtime
+    mkdir $APP_HOME/runtime
+    unzip $ZIPFILE -d $APP_HOME/runtime
+else
+    echo File not found: $ZIPFILE
+    exit 1
+fi

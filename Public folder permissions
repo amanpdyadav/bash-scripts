@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "Changing Permission to $1 and its childrens."
+
+#This line sets the permissions of all files in the directory and any file inside it 
+#(including those in subdirectories) to allow read by others.
+sudo chmod -R o+r $1
+
+#This one removes the read permission from directories.
+sudo find $1 -type d -exec chmod o-r {} \;
+
+#This one adds the execution permission for directories.
+sudo find $1 -type d -exec chmod o+x {} \;

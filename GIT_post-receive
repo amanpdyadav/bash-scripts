@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Pushing the changes from master branch to backend folder and from production to production foloer inside home directory
+echo "Determining branch"
+
+if ! [ -t 0 ]; then
+  read -a ref
+fi
+
+IFS='/' read -ra REF <<< "${ref[2]}"
+branch="${REF[2]}"
+
+if [ "master" == "$branch" ]; then    
+	# latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+    GIT_WORK_TREE=/home/backend git checkout -f master
+    echo 'changes pushed to /home/backend'
+fi
+
+if [ "production" == "$branch" ]; then
+    GIT_WORK_TREE=/home/production git checkout -f production
+    echo 'changes pushed to /home/production'
+fi
+
+echo "done"
